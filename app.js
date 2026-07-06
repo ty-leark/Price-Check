@@ -23,8 +23,11 @@ form.addEventListener("submit", async (e) => {
   form.querySelector("button").disabled = true;
 
   try {
-    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-    const data = await response.json();
+    const API_BASE = "https://price-check-unfx.onrender.com";
+
+    const response = await fetch(
+      `${API_BASE}/api/search?q=${encodeURIComponent(query)}`
+    );
 
     if (!response.ok) {
       throw new Error(data.error || "Something went wrong.");

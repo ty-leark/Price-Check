@@ -3,7 +3,7 @@ const input = document.getElementById("productInput");
 const statusEl = document.getElementById("status");
 const resultEl = document.getElementById("result");
 
-const API_BASE = "https://price-check-unfx.onrender.com";
+const API_BASE = window.location.origin;
 
 function formatPrice(value) {
   if (value === null || value === undefined) return "—";
@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
         (item) => `
           <div class="store-row">
             <span>${item.store}</span>
-            <span>${item.price ?? "—"}</span>
+            <span>${formatPrice(item.price)}</span>
           </div>
         `
       )
@@ -52,7 +52,7 @@ form.addEventListener("submit", async (e) => {
     resultEl.innerHTML = `
       <h2>The estimated market price of</h2>
       <h1>${data.product}</h1>
-      <div class="price">$${formatPrice(data.averagePrice)}</div>
+      <div class="price">${formatPrice(data.averagePrice)}</div>
       <div class="stores">${storeRows}</div>
     `;
 

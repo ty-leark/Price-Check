@@ -10,6 +10,12 @@ function formatPrice(value) {
   return `$${Number(value).toFixed(2)}`;
 }
 
+function toTitleCase(text) {
+  return text.replace(/\w\S*/g, (word) => {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -42,7 +48,7 @@ form.addEventListener("submit", async (e) => {
       .map(
         (item) => `
           <div class="store-row">
-            <span>${item.store}</span>
+            <span>${toTitleCase(item.store)}</span>
             <span>${formatPrice(item.price)}</span>
           </div>
         `
@@ -51,7 +57,7 @@ form.addEventListener("submit", async (e) => {
 
     resultEl.innerHTML = `
       <h2>The estimated market price of</h2>
-      <h1>${data.product}</h1>
+      <h1>${toTitleCase(data.product)}</h1>
       <div class="price">${formatPrice(data.averagePrice)}</div>
       <div class="stores">${storeRows}</div>
     `;
